@@ -1,0 +1,96 @@
+swagger: "2.0"
+info:
+  description: "bookmark service for bencmark"
+  version: "1.0.0"
+  title: "Bookmark Service"
+  contact:
+    email: "wesky93@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost"
+tags:
+  - name: "bookmark"
+    description: ""
+schemes:
+  - "https"
+paths:
+  /bookmark:
+    post:
+      tags:
+        - "bookmark"
+      summary: "Add new bookmark"
+      description: ""
+      operationId: "addBookmark"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Pet object that needs to be added to the bookmark"
+          required: true
+          schema:
+            $ref: "#/definitions/Bookmark"
+      responses:
+        "200":
+          description: "bookmark"
+          schema:
+            $ref: "#/definitions/Bookmark"
+        "405":
+          description: "Invalid input"
+
+definitions:
+  Site:
+    type: "object"
+    properties:
+      host:
+        type: "string"
+      category:
+        type: "string"
+  Page:
+    type: "object"
+    properties:
+      uri:
+        type: "string"
+        format: "uri"
+      title:
+        type: "string"
+      created_at:
+        type: "string"
+        format: "iso8601"
+      updated_at:
+        type: "string"
+        format: "iso8601"
+  Summary:
+    type: "object"
+    properties:
+      content_type:
+        type: "string"
+        enum:
+          - "news"
+          - "blog"
+          - "video"
+          - "audio"
+      text:
+        type: "string"
+      images:
+        type: "array"
+        items:
+          type: "string"
+          format: "uri"
+      labels:
+        type: "array"
+        items:
+          type: "string"
+  Bookmark:
+    type: "object"
+    properties:
+      summary:
+        $ref: "#/definitions/Summary"
+      page:
+        $ref: "#/definitions/Page"
+      site:
+        $ref: "#/definitions/Site"
+

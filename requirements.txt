@@ -1,0 +1,4 @@
+fastAPI==0.71.0
+grpcio==1.43.0
+homi==0.2.2
+grpcio-tools==1.43.0
